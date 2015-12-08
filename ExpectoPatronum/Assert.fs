@@ -59,3 +59,19 @@ let isNullf value format =
   match value with
   | null -> ()
   | x -> Printf.kprintf Tests.failtest format x
+
+let isLessThan a b msg =
+  if a < b then ()
+  else Tests.failtestf "Expected a (%A) to be less than b (%A)" a b
+
+let isLessThanOrEqual a b msg =
+  if a <= b then ()
+  else Tests.failtestf "Expected a (%A) to be less than or equal to b (%A)" a b
+
+let isGreaterThan a b msg =
+  if a > b then ()
+  else Tests.failtestf "Expected a (%A) to be greater than or equal to b (%A)" a b
+
+let isGreaterThanOrEqual a b msg =
+  if a >= b then ()
+  else Tests.failtestf "Expected a (%A) to be greater than or equal to b (%A)" a b

@@ -75,3 +75,12 @@ let isGreaterThan a b msg =
 let isGreaterThanOrEqual a b msg =
   if a >= b then ()
   else Tests.failtestf "Expected a (%A) to be greater than or equal to b (%A)" a b
+
+  /// specify two floats equal within a given error - epsilon.
+let floatEqual actual expected epsilon msg =
+  let epsilon = defaultArg epsilon 0.001
+  if expected <= actual + epsilon && expected >= actual - epsilon then
+    ()
+  else
+    Tests.failtestf "Expected %f to be %f within %f epsilon. %s"
+      actual expected epsilon msg

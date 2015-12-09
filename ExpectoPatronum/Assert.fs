@@ -83,4 +83,31 @@ let floatEqual actual expected epsilon msg =
     ()
   else
     Tests.failtestf "Expected %f to be %f within %f epsilon. %s"
-      actual expected epsilon msg
+                    actual expected epsilon msg
+
+let equal actual expected msg =
+  if expected = actual then ()
+  else Tests.failtestf "%s. Expected %A to equal %A, but was %A"
+                       actual expected actual msg
+
+let isFalse actual msg =
+  if not actual then ()
+  else Tests.failtest msg
+
+let isTrue actual msg =
+  if actual then ()
+  else Tests.failtest msg
+
+let sequenceEqual (actual : _ seq) (expected : _ seq) msg =
+  use ai = actual.GetEnumerator()
+  use ei = expected.GetEnumerator()
+  let mutable i = 0
+  while ei.MoveNext() do
+    if ai.MoveNext() then
+      if ai.Current = ei.Current then ()
+      else Tests.failtestf "%s. Sequence do not match at position %i. Expected: %A, but got %A"
+                           msg i (ei.Current) (ai.Current)
+    else
+      Tests.failtestf "%s. Sequence actual shorter than expected, at pos %i for expected item %A"
+                      msg i (ei.Current)
+    i <- i + 1

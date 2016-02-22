@@ -85,9 +85,9 @@ let floatEqual actual expected epsilon msg =
     Tests.failtestf "Expected %f to be %f within %f epsilon. %s"
                     actual expected epsilon msg
 
-let equal actual expected msg =
+let equal (actual : 'a) (expected : 'a) (msg : string) =
   if expected = actual then ()
-  else Tests.failtestf "%s. Expected %A to equal %A, but was %A"
+  else Tests.failtestf "%A. Expected %A to equal %A, but was %A"
                        actual expected actual msg
 
 let isFalse actual msg =

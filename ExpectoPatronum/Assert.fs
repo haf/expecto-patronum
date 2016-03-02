@@ -1,4 +1,4 @@
-﻿module Fuchu.Assert
+module Fuchu.Assert
 
 open Fuchu
 
@@ -87,8 +87,8 @@ let floatEqual actual expected epsilon msg =
 
 let equal (actual : 'a) (expected : 'a) (msg : string) =
   if expected = actual then ()
-  else Tests.failtestf "%A. Expected %A to equal %A, but was %A"
-                       actual expected actual msg
+  else Tests.failtestf "Expected %A to equal %A. %s"
+                       actual expected msg
 
 let isFalse actual msg =
   if not actual then ()

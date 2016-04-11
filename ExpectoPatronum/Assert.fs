@@ -1,4 +1,4 @@
-module Fuchu.Assert
+module ExpectoPatronum.Expect
 
 open Fuchu
 
@@ -47,8 +47,9 @@ let isChoice2Of2f value format =
   | Choice1Of2 x -> Printf.kprintf Tests.failtest format x
   | Choice2Of2 _ -> ()
 
-let isNotNull = function
-  | null -> Tests.failtest "expected not null, but was null"
+let isNotNull x format =
+  match x with
+  | null -> Tests.failtestf format
   | x -> ()
 
 let isNull = function

@@ -83,13 +83,18 @@ let floatEqual actual expected epsilon msg =
   if expected <= actual + epsilon && expected >= actual - epsilon then
     ()
   else
-    Tests.failtestf "Expected %f to be %f within %f epsilon. %s"
+    Tests.failtestf "Actual value was %f but was expected to be %f within %f epsilon. %s"
                     actual expected epsilon msg
 
 let equal (actual : 'a) (expected : 'a) (msg : string) =
   if expected = actual then ()
-  else Tests.failtestf "Expected %A to equal %A. %s"
+  else Tests.failtestf "Actual value was %A but had expected it to be: %A. %s"
                        actual expected msg
+
+let notEqual (actual : 'a) (expected : 'a) (msg : string) =
+  if expected <> actual then ()
+  else Tests.failtestf "Actual value was equal to %A but had expected it non-equal. %s"
+                       actual msg
 
 let isFalse actual msg =
   if not actual then ()

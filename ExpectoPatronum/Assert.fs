@@ -117,3 +117,10 @@ let sequenceEqual (actual : _ seq) (expected : _ seq) msg =
       Tests.failtestf "%s. Sequence actual shorter than expected, at pos %i for expected item %A"
                       msg i (ei.Current)
     i <- i + 1
+
+/// Ensures that the subject string contains the given substring. Otherwise
+/// fails with the passed message.
+let stringContains (subject : string) (substring : string) (message : string) =
+  if not (subject.Contains(substring)) then
+    Tests.failtestf "Expected subject string '%s' to contain substring '%s'. %s"
+                    subject substring message 
